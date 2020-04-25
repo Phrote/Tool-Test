@@ -23,17 +23,5 @@ jobs:
       script:
         - ./mvnw install
 
-    - stage: frontend
-      name: "frontend build"
-      language: node_js
-      node_js:
-        - 12.14.1
-      before_script:
-        - cd FrontEnd/
-        - npm install -g @angular/cli
-        - npm install --save-dev @angular-devkit/build-angular
-      script:
-        - ng build
-
  notifications:
   email: false
