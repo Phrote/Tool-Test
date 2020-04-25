@@ -1,0 +1,39 @@
+sudo: required
+dist: trusty
+
+jobs:
+ include:
+    - stage: backend
+      name: "backend tests"
+      language: java
+      jdk: oraclejdk13    
+      before_script:
+        - cd BackEnd/MusicBoard/
+        - chmod +x mvnw
+      script:
+        - ./mvnw test
+        
+    - stage: backend
+      name: "backend test and build"
+      language: java
+      jdk: oraclejdk13
+      before_script:
+        - cd BackEnd/MusicBoard/
+        - chmod +x mvnw
+      script:
+        - ./mvnw install
+
+    - stage: frontend
+      name: "frontend build"
+      language: node_js
+      node_js:
+        - 12.14.1
+      before_script:
+        - cd FrontEnd/
+        - npm install -g @angular/cli
+        - npm install --save-dev @angular-devkit/build-angular
+      script:
+        - ng build
+
+ notifications:
+  email: false
